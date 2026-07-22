@@ -1,8 +1,18 @@
 /* ---------------------------------------------------------- */
-/* 🔱 AURIGONIX STUDIOS - RETRO-GOLDEN THEME STYLES */
+/* AURIGONIX STUDIOS — PIXEL-FUTURISTIC GOLD/BLACK TERMINAL    */
 /* ---------------------------------------------------------- */
 
-/* General Styles */
+:root {
+    --black-void: #030304;
+    --black-deep: #0a0a0d;
+    --black-panel: #111114;
+    --gold: #ffc72c;
+    --gold-bright: #ffe066;
+    --gold-dim: #8a6d1a;
+    --gold-glow: rgba(255, 199, 44, 0.55);
+    --grid-line: rgba(255, 199, 44, 0.06);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,13 +20,69 @@
 }
 
 body {
-    font-family: 'Silkscreen', sans-serif;
-    font-size: 16px;
-    background: radial-gradient(circle at top, #111 0%, #000 80%);
-    color: gold;
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    letter-spacing: 0.3px;
+    background:
+        repeating-linear-gradient(90deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 40px),
+        repeating-linear-gradient(0deg, var(--grid-line) 0px, var(--grid-line) 1px, transparent 1px, transparent 40px),
+        radial-gradient(circle at top, #121212 0%, #000 80%);
+    color: var(--gold);
     cursor: none;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    position: relative;
+}
+
+/* CRT scanline overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.025) 0px,
+        rgba(255, 255, 255, 0.025) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 9997;
+}
+
+h1, h2, h3 {
+    font-family: 'Press Start 2P', monospace;
+}
+
+a:focus-visible, button:focus-visible {
+    outline: 2px dashed var(--gold);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: var(--gold);
+    color: #000;
+}
+
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: var(--black-void); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border: 2px solid var(--black-void); }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+.eyebrow {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 10px;
+}
+
+.blink {
+    animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+    50% { opacity: 0; }
 }
 
 /* Smooth Fade-in Animation for Sections */
@@ -29,7 +95,36 @@ section {
 }
 
 /* ---------------------------------------------------------- */
-/* Firefly Stars */
+/* HUD corner-bracket frame (signature element) */
+/* ---------------------------------------------------------- */
+.hud-frame {
+    position: relative;
+}
+.hud-frame::before,
+.hud-frame::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--gold);
+    z-index: 2;
+    pointer-events: none;
+}
+.hud-frame::before {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+}
+.hud-frame::after {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
+}
+
+/* ---------------------------------------------------------- */
+/* Data-bit field (formerly "fireflies") */
 /* ---------------------------------------------------------- */
 .fireflies {
     position: fixed;
@@ -38,15 +133,14 @@ section {
     pointer-events: none;
     z-index: -1;
     overflow: hidden;
-    filter: blur(0.5px);
 }
 
 .firefly {
     position: absolute;
-    width: 5px; height: 5px;
+    width: 4px; height: 4px;
     background-color: gold;
-    border-radius: 50%;
-    box-shadow: 0 0 8px gold, 0 0 16px rgba(255, 215, 0, 0.8);
+    border-radius: 0;
+    box-shadow: 0 0 6px gold, 0 0 12px rgba(255, 215, 0, 0.7);
     animation: rise 6s linear infinite;
     opacity: 0;
 }
@@ -66,8 +160,8 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    background: rgba(0, 0, 0, 0.85);
-    border-bottom: 2px solid gold;
+    background: rgba(3, 3, 4, 0.9);
+    border-bottom: 2px solid var(--gold);
     backdrop-filter: blur(6px);
     z-index: 1000;
     box-shadow: 0 0 25px rgba(255, 215, 0, 0.1);
@@ -81,11 +175,14 @@ nav ul {
 
 nav ul li a {
     text-decoration: none;
-    color: gold;
+    color: var(--gold);
     font-size: 18px;
     font-weight: bold;
-    transition: 0.3s;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
     position: relative;
+    padding-bottom: 4px;
 }
 
 nav ul li a::after {
@@ -95,15 +192,16 @@ nav ul li a::after {
     left: 0;
     width: 0%;
     height: 2px;
-    background: gold;
-    transition: width 0.3s ease;
+    background: var(--gold);
+    transition: width 0.25s steps(4);
 }
 
 nav ul li a:hover::after {
     width: 100%;
 }
 nav ul li a:hover {
-    color: white;
+    color: var(--gold-bright);
+    text-shadow: 0 0 10px gold, 0 0 20px rgba(255, 215, 0, 0.6);
 }
 
 /* ---------------------------------------------------------- */
@@ -120,20 +218,60 @@ nav ul li a:hover {
         repeating-conic-gradient(from 30deg, #0000 0 120deg, #2a2a2a 0 180deg),
         repeating-conic-gradient(from 30deg, #1a1a1a 0 60deg, #444 0 120deg);
     background-blend-mode: overlay;
-    border-top: 2px solid gold;
-    border-bottom: 2px solid gold;
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
     margin-top: 120px;
 }
 
 .banner-text {
     text-align: center;
-    color: gold;
-    text-shadow: 0 0 10px gold, 0 0 30px rgba(255, 215, 0, 0.7);
-    animation: pulseGlow 3s infinite ease-in-out;
+    color: var(--gold);
+    max-width: 800px;
+    padding: 0 20px;
 }
-@keyframes pulseGlow {
-    0%, 100% { text-shadow: 0 0 10px gold, 0 0 25px rgba(255, 215, 0, 0.7); }
-    50% { text-shadow: 0 0 25px gold, 0 0 50px rgba(255, 215, 0, 0.9); }
+
+.glitch {
+    position: relative;
+    text-shadow: 0 0 10px gold, 0 0 25px rgba(255, 215, 0, 0.7);
+}
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.glitch::before {
+    color: var(--gold-bright);
+    clip-path: inset(0 0 55% 0);
+    transform: translate(0, 0);
+    opacity: 0;
+    animation: glitchTop 6s infinite steps(1);
+}
+.glitch::after {
+    color: #fff8dc;
+    clip-path: inset(55% 0 0 0);
+    transform: translate(0, 0);
+    opacity: 0;
+    animation: glitchBottom 6s infinite steps(1);
+}
+@keyframes glitchTop {
+    0%, 92%, 100% { opacity: 0; transform: translate(0, 0); }
+    93% { opacity: 0.8; transform: translate(-3px, -1px); }
+    95% { opacity: 0.8; transform: translate(2px, 0); }
+    97% { opacity: 0; transform: translate(0, 0); }
+}
+@keyframes glitchBottom {
+    0%, 92%, 100% { opacity: 0; transform: translate(0, 0); }
+    93% { opacity: 0.7; transform: translate(3px, 1px); }
+    95% { opacity: 0.7; transform: translate(-2px, 0); }
+    97% { opacity: 0; transform: translate(0, 0); }
+}
+
+.banner-text p {
+    margin-top: 12px;
+    font-size: 20px;
 }
 
 /* ---------------------------------------------------------- */
@@ -141,6 +279,7 @@ nav ul li a:hover {
 /* ---------------------------------------------------------- */
 .logo-section {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 320px;
@@ -150,6 +289,7 @@ nav ul li a:hover {
 .logo-container {
     position: relative;
     text-align: center;
+    padding: 10px;
 }
 
 .logo-glow {
@@ -163,18 +303,26 @@ nav ul li a:hover {
     filter: drop-shadow(0 0 40px gold) drop-shadow(0 0 80px rgba(255, 215, 0, 0.9));
 }
 
+.system-line {
+    margin-top: 14px;
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+}
+
 /* ---------------------------------------------------------- */
 /* About Section */
 /* ---------------------------------------------------------- */
 #about {
     padding: 100px 20px;
     text-align: center;
-    border-bottom: 2px solid gold;
+    border-bottom: 2px solid var(--gold);
 }
 
 #about h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
+    font-size: 24px;
+    margin-bottom: 30px;
     text-shadow: 0 0 8px gold, 0 0 20px rgba(255, 215, 0, 0.6);
 }
 
@@ -182,13 +330,16 @@ nav ul li a:hover {
     max-width: 850px;
     margin: 0 auto;
     text-align: left;
-    line-height: 1.8;
+    line-height: 1.7;
+    font-size: 21px;
     color: #ffd700;
-    background: rgba(255, 215, 0, 0.05);
-    padding: 25px;
-    border-radius: 10px;
+    background: var(--black-panel);
+    padding: 30px;
     border: 1px solid rgba(255, 215, 0, 0.4);
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+}
+.about-content p + p {
+    margin-top: 16px;
 }
 
 /* ---------------------------------------------------------- */
@@ -197,40 +348,46 @@ nav ul li a:hover {
 #games {
     padding: 150px 20px;
     text-align: center;
-    border-bottom: 2px solid gold;
+    border-bottom: 2px solid var(--gold);
 }
 
 #games h2 {
-    font-size: 28px;
+    font-size: 24px;
     text-shadow: 0 0 8px gold, 0 0 20px rgba(255, 215, 0, 0.6);
 }
 
-.game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    margin-top: 40px;
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 60px;
+    justify-items: center;
+    align-items: start;
+    margin-top: 50px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .game-icon-box {
     text-align: center;
     transition: transform 0.4s ease;
+    max-width: 320px;
+    padding: 18px;
+    background: rgba(255, 199, 44, 0.03);
 }
 .game-icon-box:hover {
     transform: translateY(-10px);
 }
 
 .gif-container {
-    width: 300px;
-    border-radius: 10px;
-    border: 2px solid gold;
+    width: 260px;
+    border: 2px solid var(--gold);
     overflow: hidden;
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto; /* ✅ Centers the container itself */
+    margin: 0 auto;
 }
 
 .gif-container img {
@@ -239,11 +396,30 @@ nav ul li a:hover {
     display: block;
 }
 
-.coming-soon {
-    color: #ffcc33;
+.game-icon-box h3 {
+    margin-top: 16px;
     font-size: 14px;
-    margin-top: 8px;
-    text-shadow: 0 0 10px gold;
+}
+
+.status-badge {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 5px 10px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 2px solid var(--gold);
+}
+.status-badge.live {
+    color: #0a0a0d;
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold-glow);
+}
+.status-badge.locked {
+    color: var(--gold-dim);
+    border-color: var(--gold-dim);
+    background: transparent;
 }
 
 /* ---------------------------------------------------------- */
@@ -252,6 +428,19 @@ nav ul li a:hover {
 #contact {
     padding: 100px 20px;
     text-align: center;
+}
+.contact-box {
+    max-width: 500px;
+    margin: 30px auto 0;
+    padding: 30px;
+    background: var(--black-panel);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    font-size: 21px;
+}
+.contact-box p:first-child {
+    color: var(--gold-dim);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
 }
 #contact a {
     color: gold;
@@ -267,53 +456,77 @@ nav ul li a:hover {
 /* Footer */
 /* ---------------------------------------------------------- */
 footer {
-    background: #0a0a0a;
+    background: var(--black-void);
     padding: 25px;
     text-align: center;
-    border-top: 2px solid gold;
-    font-size: 14px;
+    border-top: 2px solid var(--gold);
+    font-size: 16px;
     color: #ffdf70;
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
 }
 
 /* ---------------------------------------------------------- */
-/* Cursor and Ripple Effects */
+/* Cursor and Ripple Effects — pixel reticle */
 /* ---------------------------------------------------------- */
 .custom-cursor {
     position: fixed;
-    width: 20px; height: 20px;
-    background-color: gold;
-    border-radius: 50%;
-    box-shadow: 0 0 15px gold, 0 0 30px rgba(255, 215, 0, 0.8);
+    width: 10px; height: 10px;
+    background-color: var(--gold);
+    border-radius: 0;
+    box-shadow: 0 0 10px gold, 0 0 20px rgba(255, 215, 0, 0.7);
     pointer-events: none;
     transform: translate(-50%, -50%);
     opacity: 1;
-    transition: opacity 0.3s, transform 0.2s;
+    transition: opacity 0.3s, transform 0.15s;
     z-index: 9999;
 }
+.custom-cursor::before,
+.custom-cursor::after {
+    content: "";
+    position: absolute;
+    background: var(--gold);
+}
+.custom-cursor::before {
+    width: 16px; height: 2px;
+    top: 4px; left: -3px;
+}
+.custom-cursor::after {
+    width: 2px; height: 16px;
+    top: -3px; left: 4px;
+}
 .custom-cursor.fade-in {
-    opacity: 0.5;
-    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1.6);
 }
 
 .ripple-effect {
     position: fixed;
-    width: 16px; height: 16px;
-    background-color: gold;
-    border-radius: 50%;
-    box-shadow: 0 0 5px gold, 0 0 15px rgba(255, 215, 0, 0.8);
+    width: 14px; height: 14px;
+    background-color: transparent;
+    border: 2px solid var(--gold);
+    border-radius: 0;
+    box-shadow: 0 0 8px gold;
     pointer-events: none;
-    transform: translate(-50%, -50%);
-    animation: ripple 0.5s ease-out;
+    transform: translate(-50%, -50%) rotate(45deg);
+    animation: ripple 0.5s steps(5) forwards;
     z-index: 9998;
 }
 @keyframes ripple {
-    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(5); opacity: 0; }
+    0% { transform: translate(-50%, -50%) rotate(45deg) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) rotate(45deg) scale(4.5); opacity: 0; }
 }
 
 /* ---------------------------------------------------------- */
-/* 🌐 Improved Mobile Optimization */
+/* Reduced motion */
+/* ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    section, .glitch::before, .glitch::after, .blink, .firefly, .ripple-effect {
+        animation: none !important;
+    }
+}
+
+/* ---------------------------------------------------------- */
+/* Improved Mobile Optimization */
 /* ---------------------------------------------------------- */
 @media (max-width: 1024px) {
     header {
@@ -330,12 +543,12 @@ footer {
         height: 300px;
         margin-top: 100px;
     }
-    .banner-text h1 {
-        font-size: 24px;
+    .glitch {
+        font-size: 20px;
         line-height: 1.4;
     }
     .banner-text p {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .logo-section {
@@ -352,34 +565,32 @@ footer {
     }
     .about-content {
         padding: 20px;
-        font-size: 15px;
+        font-size: 18px;
         line-height: 1.6;
     }
 
     #games {
         padding: 100px 10px;
     }
-    .game-container {
-        flex-direction: column;
-        gap: 30px;
-    }
     .gif-container {
-        width: 260px;
-    }
-    .coming-soon {
-        font-size: 13px;
+        width: 220px;
     }
 
     #contact {
         padding: 80px 10px;
     }
     footer {
-        font-size: 13px;
+        font-size: 14px;
         padding: 20px;
+    }
+
+    .hud-frame::before, .hud-frame::after {
+        width: 12px;
+        height: 12px;
     }
 }
 
-/* 📱 Small Phones (under 600px) */
+/* Small Phones (under 600px) */
 @media (max-width: 600px) {
     .logo-glow {
         width: 85vw;
@@ -387,11 +598,11 @@ footer {
         max-width: 380px;
     }
 
-    .banner-text h1 {
-        font-size: 20px;
+    .glitch {
+        font-size: 16px;
     }
     .banner-text p {
-        font-size: 13px;
+        font-size: 14px;
     }
 
     nav ul {
@@ -402,43 +613,29 @@ footer {
     }
 
     .gif-container {
-        width: 220px;
+        width: 200px;
     }
 
     .about-content {
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.5;
     }
 
-    footer {
-        font-size: 12px;
+    .contact-box {
+        font-size: 17px;
+        padding: 20px;
     }
+
+    footer {
+        font-size: 13px;
+    }
+
+    /* Hide the custom cursor/reticle on touch devices */
+    body { cursor: auto; }
+    .custom-cursor { display: none; }
 }
 
-/* ---------------------------------------------------------- */
-/* Responsive Games Grid */
-/* ---------------------------------------------------------- */
-.games-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 60px;
-    justify-items: center;
-    align-items: start;
-    margin-top: 50px;
-}
-
-/* Ensure consistent spacing inside each card */
-.game-icon-box {
-    text-align: center;
-    transition: transform 0.4s ease;
-    max-width: 320px;
-}
-
-.game-icon-box:hover {
-    transform: translateY(-10px);
-}
-
-/* On smaller screens, stack vertically and center */
+/* On smaller screens, stack the games grid and center it */
 @media (max-width: 768px) {
     .games-grid {
         display: flex;
@@ -447,6 +644,3 @@ footer {
         gap: 40px;
     }
 }
-
-
-
