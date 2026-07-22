@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aurigonix Studio</title>
     <link rel="icon" type="image/png" href="image/aurigonixlogo.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Fireflies Background -->
+    <!-- Data-bit field -->
     <div class="fireflies"></div>
 
     <!-- Logo Section -->
     <section class="logo-section">
-        <div class="logo-container">
+        <div class="logo-container hud-frame">
             <img src="image/aurigonixlogo.png" alt="Aurigonix Studio Logo" class="logo-glow">
         </div>
+        <p class="system-line">SYSTEM://AURIGONIX <span class="blink">_</span></p>
     </section>
 
     <!-- Header Navigation -->
@@ -33,7 +34,8 @@
     <!-- Banner -->
     <section class="banner">
         <div class="banner-text">
-            <h1>Forged in Gold. Designed in Pixels.</h1>
+            <p class="eyebrow">// AURIGONIX_STUDIO.EXE</p>
+            <h1 class="glitch" data-text="Forged in Gold. Designed in Pixels.">Forged in Gold. Designed in Pixels.</h1>
             <p>Welcome to AURIGONIX Studio — where art meets challenge.</p>
         </div>
     </section>
@@ -43,15 +45,15 @@
         <!-- About Section -->
         <section id="about">
             <h2>About Aurigonix Studio</h2>
-            <div class="about-content">
+            <div class="about-content hud-frame">
                 <p>
-                    At Aurigonix Studio, we craft experiences that test your skill, ignite your passion, and remind you why games should challenge — not coddle. 
+                    At Aurigonix Studio, we craft experiences that test your skill, ignite your passion, and remind you why games should challenge — not coddle.
                 </p>
                 <p>
                     Every project we build is a fusion of pixel art beauty and gameplay intensity. We draw from the golden age of retro gaming, blending nostalgia with cutting-edge design and precision.
                 </p>
                 <p>
-                    Our goal is simple: to make every pixel matter and every victory unforgettable. 
+                    Our goal is simple: to make every pixel matter and every victory unforgettable.
                     Welcome to Aurigonix Studio — your next challenge begins here.
                 </p>
             </div>
@@ -60,57 +62,49 @@
         <!-- Games Section -->
         <section id="games">
             <h2>Our Games</h2>
-       <div class="game-container">
-    <div class="game-icon-box">
-        <div class="gif-container">
-                <img src="image/DOT.png" alt="Nimbus Leap">
-        </div>
-        <h3>Nimbus Leap</h3>
-        <p class="coming-soon">Out Now!</p>
-    </div>
-</div>
+            <div class="games-grid">
+                <div class="game-icon-box hud-frame">
+                    <div class="gif-container">
+                        <img src="image/DOT.png" alt="Nimbus Leap">
+                    </div>
+                    <h3>Nimbus Leap</h3>
+                    <span class="status-badge live">Out Now</span>
+                </div>
 
-            <div class="game-container">
-    <div class="game-icon-box">
-        <div class="gif-container">
-            <img src="image/GoldScale.png" alt="Gold Scale">
-        </div>
-        <h3>Gold Scale</h3>
-        <p class="coming-soon">Coming Soon</p>
-    </div>
-</div>
+                <div class="game-icon-box hud-frame">
+                    <div class="gif-container">
+                        <img src="image/GoldScale.png" alt="Gold Scale">
+                    </div>
+                    <h3>Gold Scale</h3>
+                    <span class="status-badge locked">Coming Soon</span>
+                </div>
 
-            <div class="game-container">
-    <div class="game-icon-box">
-        <div class="gif-container">
-            <img src="image/F2R.png" alt="Flip To Riches">
-        </div>
-        <h3>Flip To Riches</h3>
-        <p class="coming-soon">Coming Soon</p>
-    </div>
-</div>
+                <div class="game-icon-box hud-frame">
+                    <div class="gif-container">
+                        <img src="image/F2R.png" alt="Flip To Riches">
+                    </div>
+                    <h3>Flip To Riches</h3>
+                    <span class="status-badge locked">Coming Soon</span>
+                </div>
+            </div>
         </section>
-
-        
 
         <!-- Contact Section -->
         <section id="contact">
             <h2>Contact Us</h2>
-            <p>Email: <a href="mailto:aurigonixstudios@gmail.com">aurigonixstudios@gmail.com</a></p>
+            <div class="contact-box hud-frame">
+                <p>&gt; open_channel</p>
+                <p>Email: <a href="mailto:aurigonixstudios@gmail.com">aurigonixstudios@gmail.com</a></p>
+            </div>
         </section>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Aurigonix Studio. All rights reserved.</p>
+        <p>&copy; 2025 Aurigonix Studio. All rights reserved. <span class="blink">_</span></p>
     </footer>
 
     <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
