@@ -421,7 +421,35 @@ nav ul li a:hover {
     border-color: var(--gold-dim);
     background: transparent;
 }
+/* Download Button */
+.status-badge.download {
+    display: inline-block;
+    color: var(--black-void);
+    background: var(--gold);
+    border: 2px solid var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--gold-glow);
+    transition: all .25s ease;
+}
 
+.status-badge.download:hover {
+    background: var(--gold-bright);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 12px var(--gold),
+        0 0 24px rgba(255,199,44,.45);
+}
+
+.status-badge.download:active {
+    transform: translateY(1px) scale(.97);
+}
+
+.status-badge.download:focus-visible {
+    outline: 2px dashed var(--gold);
+    outline-offset: 3px;
+}
 /* ---------------------------------------------------------- */
 /* Contact Section */
 /* ---------------------------------------------------------- */
